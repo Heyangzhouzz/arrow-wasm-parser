@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+    <h1>WASM Ploars</h1>
+    <input type="file" id="fileInput" />
+    <button id="parseButton">Parse File</button>
+    <button id="decompressArrow">Decompress</button>
+
+
+
+    <script>
+        
+    </script>
+    <script type="module">
+        import init from "./dist/arrow_util_wasm.js";
+       
+
+        document.getElementById('parseButton').addEventListener('click', async () => {
+            const wasm = await init("./dist/arrow_util_wasm_bg.wasm");
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const buffer = await file.arrayBuffer();
+                const result = wasm.parse_arrow_to_json(new Uint8Array(buffer));
+                console.log(result);
+            } else {
+                alert("Please select a file to parse.");
+            }
+        });
+
+        document.getElementById('decompressArrow').addEventListener('click', async () => {
+            const wasm = await init("./dist/arrow_util_wasm_bg.wasm");
+            const fileInput = document.getElementById('fileInput');
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                const buffer = await file.arrayBuffer();
+                const result = new Uint8Array(wasm.decompress_arrow(new Uint8Array(buffer)));
+                
+                const blob = new Blob([result], { type: 'application/octet-stream' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = file.name.replace('.arrow', '_decompressed.arrow');
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } else {
+                alert("Please select a file to decompress.");
+            }
+        });
+
+
+        
+    
+    </script>
+</body>
+</html>

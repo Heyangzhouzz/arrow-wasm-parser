@@ -1,0 +1,13 @@
+{
+  "name": "arrow-util-wasm",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "wasm-pack build ./rust --target web --out-dir ../dist --release",
+    "start": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module"
+}

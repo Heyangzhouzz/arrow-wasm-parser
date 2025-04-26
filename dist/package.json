@@ -1,0 +1,15 @@
+{
+  "name": "arrow-util-wasm",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "arrow_util_wasm_bg.wasm",
+    "arrow_util_wasm.js",
+    "arrow_util_wasm.d.ts"
+  ],
+  "main": "arrow_util_wasm.js",
+  "types": "arrow_util_wasm.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
