@@ -7,7 +7,8 @@ edition = "2021"
 wasm-bindgen = "0.2.100"
 console_error_panic_hook = "0.1.7"
 js-sys = "0.3.76"
-arrow = "55.0.0"
+arrow = {version = "55.0.0"}
+arrow-ipc = {version = "55.0.0", features = ["lz4"]}
 
 [lib]
 crate-type = ["cdylib"]
